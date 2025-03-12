@@ -7,8 +7,11 @@ import {
   FaHtml5,
   FaCss3Alt,
   FaPhp,
+  FaJs,
   FaWordpressSimple,
   FaDownload,
+  FaReact,
+  FaJava,
 } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { Bar, Pie } from "react-chartjs-2";
@@ -17,6 +20,8 @@ import PersonalImage from "./../Images/PersonalImage.png";
 import OuterBanx from "./../Images/OuterBanx.png";
 import TrainWeb from "./../Images/TrainWeb.png";
 import resumePDF from "./../Images/Kevaun Harris Resume.pdf";
+import MovingCode from "./../Images/MovingCode.gif";
+
 ChartJS.register(...registerables, CategoryScale);
 
 const barChartData = {
@@ -86,21 +91,22 @@ function PortfolioPage() {
           </div>
           <div className="flex items-center gap-2">
             <FaUserAlt className="text-[#FFD15C]" />
-            <span>Age: 26</span>
+            <span>Age: 22</span>
           </div>
           <div className="flex items-center gap-2">
             <FaCalendarAlt className="text-[#FFD15C]" />
-            <span>Residence: Canada</span>
+            <span>Residence: Ontario, Whitby</span>
           </div>
           <div className="flex items-center gap-2">
             <FaLanguage className="text-[#FFD15C]" />
-            <span>English, French, Spanish</span>
+            <span>English</span>
           </div>
         </div>
+        <h3 className="text-lg mb-4">Proficiency</h3>
         <div className="space-y-4">
-          <SkillBar skill="HTML" icon={<FaHtml5 />} percentage="90" />
-          <SkillBar skill="CSS" icon={<FaCss3Alt />} percentage="85" />
-          <SkillBar skill="PHP" icon={<FaPhp />} percentage="60" />
+          <SkillBar skill="React" icon={<FaReact />} percentage="90" />
+          <SkillBar skill="Java" icon={<FaJava />} percentage="85" />
+          <SkillBar skill="Javascript" icon={<FaJs />} percentage="60" />
           <SkillBar
             skill="WordPress"
             icon={<FaWordpressSimple />}
