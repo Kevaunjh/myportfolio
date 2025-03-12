@@ -1,291 +1,330 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  FaUserCircle,
-  FaGithub,
-  FaLinkedin,
-  FaBriefcase,
+  FaMapMarkerAlt,
+  FaUserAlt,
+  FaCalendarAlt,
+  FaLanguage,
+  FaHtml5,
+  FaCss3Alt,
+  FaPhp,
+  FaWordpressSimple,
   FaDownload,
 } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
 import { Bar, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, registerables, CategoryScale } from "chart.js";
-import AboutMe from "./AboutMe";
-import Projects from "./Projects";
-import Experience from "./Experience";
-import Contact from "./Contact";
-import Thoughts from "./Thoughts";
-import resumePDF from "./../Images/Kevaun Harris Resume.pdf";
+
+// Example placeholders for images / PDFs
+import PersonalImage from "./../Images/PersonalImage.png";
 import OuterBanx from "./../Images/OuterBanx.png";
 import TrainWeb from "./../Images/TrainWeb.png";
-import PersonalImage from "./../Images/PersonalImage.png";
+import resumePDF from "./../Images/Kevaun Harris Resume.pdf";
+
+// Register chart components
 ChartJS.register(...registerables, CategoryScale);
 
-function Landingpage() {
-  const [activeTab, setActiveTab] = useState("dashboard");
+// Chart data for "Certifications" card
+const barChartData = {
+  labels: ["Data Structures", "Web Dev", "AI", "Cloud", "Security"],
+  datasets: [
+    {
+      label: "Proficiency Level",
+      data: [90, 85, 80, 70, 75],
+      backgroundColor: ["#4A90E2", "#50E3C2", "#F5A623", "#D0021B", "#9013FE"],
+    },
+    {
+      label: "Interest Level",
+      data: [95, 80, 85, 90, 70],
+      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#8E44AD", "#2ECC71"],
+    },
+  ],
+};
 
-  const chartData = {
-    labels: ["Data Structures", "Web Dev", "AI", "Cloud", "Security"],
-    datasets: [
-      {
-        label: "Proficiency Level",
-        data: [90, 85, 80, 70, 75],
-        backgroundColor: [
-          "#4A90E2",
-          "#50E3C2",
-          "#F5A623",
-          "#D0021B",
-          "#9013FE",
-        ],
-      },
-      {
-        label: "Interest Level",
-        data: [95, 80, 85, 90, 70],
-        backgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56",
-          "#8E44AD",
-          "#2ECC71",
-        ],
-      },
-    ],
-  };
+const barChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+};
 
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-  };
+// Pie chart data for the "Technologies" card
+const pieChartData = {
+  labels: ["React", "Node.js", "Python", "Firebase", "AWS", "Docker"],
+  datasets: [
+    {
+      data: [30, 20, 15, 15, 10, 10],
+      backgroundColor: [
+        "#61DBFB", // React
+        "#68A063", // Node.js
+        "#FFD43B", // Python
+        "#FFCA28", // Firebase
+        "#FF9900", // AWS
+        "#0db7ed", // Docker
+      ],
+    },
+  ],
+};
 
-  const pieData = {
-    labels: ["React", "Node.js", "Python", "Firebase", "AWS", "Docker"],
-    datasets: [
-      {
-        data: [30, 20, 15, 15, 10, 10],
-        backgroundColor: [
-          "#61DBFB",
-          "#68A063",
-          "#FFD43B",
-          "#FFCA28",
-          "#FF9900",
-          "#0db7ed",
-        ],
-      },
-    ],
-  };
+const pieChartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+};
 
-  const pieOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-  };
-
-  const renderContent = () => {
-    if (activeTab === "dashboard") {
-      return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <div
-            onClick={() => setActiveTab("aboutme")}
-            className="bg-gray-800 p-4 rounded-lg shadow-md flex flex-col cursor-pointer hover:bg-gray-700 transition"
-          >
-            <h2 className="text-3xl font-bold mb-2">About Me</h2>
-            <div className="bg-gray-300 w-32 h-32 rounded-full mb-2 flex items-center justify-center">
-              <img
-                src={PersonalImage}
-                alt="Personal"
-                className="rounded-full mt-8 mb-8"
-              />
-            </div>
-            <p className="text-md">
-              I'm a passionate software engineer with experience in full-stack
-              development, creating dynamic user interfaces and scalable backend
-              solutions.
-            </p>
+function PortfolioPage() {
+  return (
+    <div className="min-h-screen flex bg-[#212428] text-gray-100">
+      {/* LEFT SIDEBAR */}
+      <aside className="w-72 bg-[#1E1F23] flex flex-col p-6">
+        {/* Profile Section */}
+        <div className="flex flex-col items-center text-center mb-8">
+          <div className="w-24 h-24 rounded-full overflow-hidden mb-4">
+            <img
+              src={PersonalImage}
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
           </div>
-
-          <div className="bg-gray-800 p-4 rounded-lg shadow-md flex flex-col">
-            <h2 className="text-3xl font-bold mb-2">Certifications</h2>
-            <div className="relative w-full" style={{ height: "300px" }}>
-              <Bar data={chartData} options={chartOptions} />
-            </div>
-          </div>
-
-          <div
-            onClick={() => setActiveTab("projects")}
-            className="bg-gray-800 p-4 rounded-lg shadow-md flex flex-col cursor-pointer hover:bg-gray-700 transition"
-          >
-            <h2 className="text-3xl font-bold mb-2">My Projects</h2>
-            <div className="flex gap-2 items-center">
-              <div className="bg-gray-300 w-1/2 h-24 flex items-center justify-center">
-                <img src={OuterBanx} alt="Outer Banx" />
-              </div>
-              <div className="bg-gray-300 w-1/2 h-24 flex items-center justify-center">
-                <img src={TrainWeb} alt="Train Web" />
-              </div>
-            </div>
-            <p className="text-md mt-2">
-              Developed AI dashboards, e-commerce platforms, and real-time data
-              visualizations focusing on usability, performance, and
-              scalability.
-            </p>
-          </div>
-
-          <div
-            onClick={() => setActiveTab("thoughts")}
-            className="bg-gray-800 p-4 rounded-lg shadow-md flex flex-col cursor-pointer hover:bg-gray-700 transition"
-          >
-            <h2 className="text-3xl font-bold mb-2">
-              My Technological Thoughts
-            </h2>
-            <p className="text-md">
-              Sharing insights on software trends, AI innovations, and best
-              coding practices.
-            </p>
-          </div>
-
-          <div
-            onClick={() => setActiveTab("experience")}
-            className="bg-gray-800 p-4 rounded-lg shadow-md flex flex-col cursor-pointer hover:bg-gray-700 transition"
-          >
-            <h2 className="text-3xl font-bold mb-2">Experience</h2>
-            <p className="text-md">
-              Professional experience in developing robust software solutions
-              and managing projects.
-            </p>
-          </div>
-
-          <div className="bg-gray-800 p-4 rounded-lg shadow-md flex flex-col md:col-span-2">
-            <h2 className="text-3xl font-bold mb-2">Technologies</h2>
-            <p className="text-md">
-              Expertise in various technologies including React, Node.js,
-              Python, Firebase, AWS, and Docker.
-            </p>
-            <div className="relative w-full mt-4" style={{ height: "300px" }}>
-              <Pie data={pieData} options={pieOptions} />
-            </div>
-            <p className="text-md mt-2">
-              This chart represents the distribution of technologies I work
-              with, spanning frontend, backend, and cloud-based solutions.
-            </p>
-          </div>
-
-          <a
-            href={resumePDF}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="col-span-1"
-          >
-            <div className="bg-gray-800 p-4 rounded-lg shadow-md flex flex-col items-center justify-center hover:bg-gray-700 transition min-h-[420px]">
-              <FaDownload size={48} className="mb-4" />
-              <h2 className="text-3xl font-bold mb-2">Download Resume</h2>
-              <p className="text-md text-center">
-                Click here to view or download my latest resume.
-              </p>
-            </div>
-          </a>
-        </div>
-      );
-    } else if (activeTab === "aboutme") {
-      return <AboutMe />;
-    } else if (activeTab === "projects") {
-      return <Projects />;
-    } else if (activeTab === "experience") {
-      return <Experience />;
-    } else if (activeTab === "thoughts") {
-      return <Thoughts />;
-    } else if (activeTab === "technologies") {
-      return (
-        <div className="p-6">
-          <h2 className="text-3xl font-bold mb-4">Technologies</h2>
-          <div className="relative w-full" style={{ height: "300px" }}>
-            <Pie data={pieData} options={pieOptions} />
-          </div>
-          <p className="text-md mt-2">
-            This chart represents the distribution of technologies I work with,
-            including frontend, backend, and cloud-based solutions.
+          <h2 className="text-xl font-bold">Kevaun Harris</h2>
+          <p className="text-sm text-gray-400">
+            Front End Developer / UI/UX Engineer
           </p>
         </div>
-      );
-    } else {
-      return (
-        <div className="p-6">
-          <h2 className="text-3xl font-bold mb-4">
-            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-          </h2>
-          <p>Content for {activeTab} will be added soon.</p>
-        </div>
-      );
-    }
-  };
 
-  return (
-    <div className="flex h-screen bg-gray-900 text-white overflow-x-hidden">
-      <div className="w-64 bg-blue-950 text-white flex flex-col p-4">
-        <div className="flex items-center gap-2 mb-4 border-b border-white pb-2">
-          <FaUserCircle size={50} />
-          <div>
-            <h2 className="text-2xl font-bold">Kevaun Harris</h2>
-            <p className="text-lg">Software Engineer</p>
-            <p className="text-md">
-              Expertise in React, JavaScript, Python, Java
-            </p>
+        {/* Additional Info */}
+        <div className="text-sm space-y-2 mb-8">
+          <div className="flex items-center gap-2">
+            <FaMapMarkerAlt className="text-[#FFD15C]" />
+            <span>Toronto, Canada</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaUserAlt className="text-[#FFD15C]" />
+            <span>Age: 26</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaCalendarAlt className="text-[#FFD15C]" />
+            <span>Residence: Canada</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaLanguage className="text-[#FFD15C]" />
+            <span>English, French, Spanish</span>
           </div>
         </div>
-        <nav className="flex flex-col gap-2 flex-1">
-          {[
-            "dashboard",
-            "aboutme",
-            "projects",
-            "experience",
-            "courses",
-            "thoughts",
-            "technologies",
-          ].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`p-2 text-lg rounded-md ${
-                activeTab === tab ? "bg-blue-700" : "hover:bg-blue-700"
-              }`}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
-        </nav>
-        <div className="mt-4 pt-4 border-t border-white flex items-center justify-around">
-          <a
-            href="https://github.com/Kevaunjh"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-gray-300 flex flex-col items-center"
-          >
-            <FaGithub size={24} />
-            <span className="text-xs mt-1">GitHub</span>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/kevaunharris/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-gray-300 flex flex-col items-center"
-          >
-            <FaLinkedin size={24} />
-            <span className="text-xs mt-1">LinkedIn</span>
-          </a>
-          <a
-            href="https://profile.indeed.com/?hl=en_US&co=US&from=gnav-homepage"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-gray-300 flex flex-col items-center"
-          >
-            <FaBriefcase size={24} />
-            <span className="text-xs mt-1">Indeed</span>
-          </a>
-        </div>
-      </div>
 
-      <div className="flex-1 p-6 overflow-auto">
-        <h1 className="text-5xl font-extrabold mb-6">My Dashboard</h1>
-        {renderContent()}
+        {/* Skill Bars */}
+        <div className="space-y-4">
+          <SkillBar skill="HTML" icon={<FaHtml5 />} percentage="90" />
+          <SkillBar skill="CSS" icon={<FaCss3Alt />} percentage="85" />
+          <SkillBar skill="PHP" icon={<FaPhp />} percentage="60" />
+          <SkillBar
+            skill="WordPress"
+            icon={<FaWordpressSimple />}
+            percentage="50"
+          />
+        </div>
+      </aside>
+
+      {/* MAIN CONTENT */}
+      <main className="flex-1 p-8">
+        {/* HERO / INTRO SECTION */}
+        <section className="bg-[#1E1F23] rounded-lg p-8 mb-8 flex flex-col md:flex-row items-center">
+          <div className="flex-1">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Discover my Amazing Art Space!
+            </h1>
+            <p className="text-lg text-gray-300 mb-6">
+              I build{" "}
+              <code className="bg-[#212428] px-1 py-0.5 rounded">
+                {"<code>"}
+              </code>
+            </p>
+            <button className="bg-[#FFD15C] text-gray-900 px-6 py-3 font-semibold rounded-full inline-flex items-center hover:bg-yellow-400 transition">
+              Explore Now
+              <IoIosArrowForward className="ml-2" />
+            </button>
+          </div>
+          <div className="mt-8 md:mt-0 md:ml-8 w-48 h-48 rounded-full bg-gray-500 flex-shrink-0"></div>
+        </section>
+
+        {/* STATS ROW */}
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <StatCard value="10+" label="Years Experience" />
+          <StatCard value="143" label="Completed Projects" />
+          <StatCard value="114" label="Happy Customers" />
+          <StatCard value="20+" label="Honors & Awards" />
+        </section>
+
+        {/* MY SERVICES SECTION */}
+        <section className="mb-8">
+          <h2 className="text-3xl font-bold mb-4">My Services</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <ServiceCard
+              title="Web Development"
+              description="I create responsive, dynamic websites using modern frameworks and best practices."
+            />
+            <ServiceCard
+              title="UI/UX Design"
+              description="I design user-centric interfaces that balance aesthetics and usability."
+            />
+            <ServiceCard
+              title="Sound Design"
+              description="I produce immersive audio experiences for apps, games, and interactive projects."
+            />
+          </div>
+        </section>
+
+        {/* DASHBOARD INFO BELOW "MY SERVICES" */}
+        <section className="mb-8">
+          <h2 className="text-3xl font-bold mb-6">More Information</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* About Me Card */}
+            <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
+              <h3 className="text-xl font-bold mb-2">About Me</h3>
+              <div className="w-32 h-32 rounded-full overflow-hidden mb-4 mx-auto">
+                <img
+                  src={PersonalImage}
+                  alt="Personal"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-gray-300 mb-4">
+                I'm a passionate software engineer with experience in full-stack
+                development, creating dynamic user interfaces and scalable
+                backend solutions.
+              </p>
+            </div>
+
+            {/* Certifications Card */}
+            <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
+              <h3 className="text-xl font-bold mb-2">Certifications</h3>
+              <div className="relative w-full" style={{ height: "300px" }}>
+                <Bar data={barChartData} options={barChartOptions} />
+              </div>
+            </div>
+
+            {/* Projects Card */}
+            <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
+              <h3 className="text-xl font-bold mb-2">My Projects</h3>
+              <div className="flex gap-2 mb-4">
+                <div className="bg-gray-300 w-1/2 h-24 flex items-center justify-center">
+                  <img
+                    src={OuterBanx}
+                    alt="Outer Banx"
+                    className="object-contain"
+                  />
+                </div>
+                <div className="bg-gray-300 w-1/2 h-24 flex items-center justify-center">
+                  <img
+                    src={TrainWeb}
+                    alt="Train Web"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+              <p className="text-gray-300 mb-4">
+                Developed AI dashboards, e-commerce platforms, and real-time
+                data visualizations focusing on usability, performance, and
+                scalability.
+              </p>
+            </div>
+
+            {/* Thoughts Card */}
+            <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
+              <h3 className="text-xl font-bold mb-2">
+                My Technological Thoughts
+              </h3>
+              <p className="text-gray-300 mb-4">
+                Sharing insights on software trends, AI innovations, and best
+                coding practices.
+              </p>
+            </div>
+
+            {/* Experience Card */}
+            <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
+              <h3 className="text-xl font-bold mb-2">Experience</h3>
+              <p className="text-gray-300 mb-4">
+                Professional experience in developing robust software solutions
+                and managing projects.
+              </p>
+            </div>
+
+            {/* Technologies Card */}
+            <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col md:col-span-2">
+              <h3 className="text-xl font-bold mb-2">Technologies</h3>
+              <p className="text-gray-300 mb-4">
+                Expertise in various technologies including React, Node.js,
+                Python, Firebase, AWS, and Docker.
+              </p>
+              <div className="relative w-full mt-4" style={{ height: "300px" }}>
+                <Pie data={pieChartData} options={pieChartOptions} />
+              </div>
+              <p className="text-gray-300 mt-2">
+                This chart represents the distribution of technologies I work
+                with, spanning frontend, backend, and cloud-based solutions.
+              </p>
+            </div>
+
+            {/* Download Resume Card */}
+            <a
+              href={resumePDF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="col-span-1"
+            >
+              <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col items-center justify-center hover:bg-[#27282C] transition min-h-[420px]">
+                <FaDownload size={48} className="mb-4 text-[#FFD15C]" />
+                <h3 className="text-xl font-bold mb-2">Download Resume</h3>
+                <p className="text-gray-300 text-center">
+                  Click here to view or download my latest resume.
+                </p>
+              </div>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+/* Skill Bar Component */
+function SkillBar({ skill, icon, percentage }) {
+  return (
+    <div>
+      <div className="flex justify-between mb-1 text-sm">
+        <span className="flex items-center gap-2">
+          <span className="text-[#FFD15C]">{icon}</span>
+          {skill}
+        </span>
+        <span>{percentage}%</span>
+      </div>
+      <div className="w-full bg-[#2A2B2F] h-2 rounded">
+        <div
+          className="bg-[#FFD15C] h-2 rounded"
+          style={{ width: `${percentage}%` }}
+        ></div>
       </div>
     </div>
   );
 }
 
-export default Landingpage;
+/* Stats Card Component */
+function StatCard({ value, label }) {
+  return (
+    <div className="bg-[#1E1F23] p-6 text-center rounded-lg">
+      <h3 className="text-3xl font-bold text-[#FFD15C] mb-2">{value}</h3>
+      <p className="text-sm text-gray-300">{label}</p>
+    </div>
+  );
+}
+
+/* Service Card Component */
+function ServiceCard({ title, description }) {
+  return (
+    <div className="bg-[#1E1F23] p-6 rounded-lg text-center flex flex-col">
+      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <p className="text-gray-300 mb-4">{description}</p>
+      <button className="bg-[#FFD15C] text-gray-900 px-4 py-2 font-semibold rounded-full hover:bg-yellow-400 transition mt-auto">
+        Order Now
+      </button>
+    </div>
+  );
+}
+
+export default PortfolioPage;
