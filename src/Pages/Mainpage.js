@@ -14,16 +14,13 @@ import { IoIosArrowForward } from "react-icons/io";
 import { Bar, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, registerables, CategoryScale } from "chart.js";
 
-// Example placeholders for images / PDFs
 import PersonalImage from "./../Images/PersonalImage.png";
 import OuterBanx from "./../Images/OuterBanx.png";
 import TrainWeb from "./../Images/TrainWeb.png";
 import resumePDF from "./../Images/Kevaun Harris Resume.pdf";
 
-// Register chart components
 ChartJS.register(...registerables, CategoryScale);
 
-// Chart data for "Certifications" card
 const barChartData = {
   labels: ["Data Structures", "Web Dev", "AI", "Cloud", "Security"],
   datasets: [
@@ -45,19 +42,18 @@ const barChartOptions = {
   maintainAspectRatio: false,
 };
 
-// Pie chart data for the "Technologies" card
 const pieChartData = {
   labels: ["React", "Node.js", "Python", "Firebase", "AWS", "Docker"],
   datasets: [
     {
       data: [30, 20, 15, 15, 10, 10],
       backgroundColor: [
-        "#61DBFB", // React
-        "#68A063", // Node.js
-        "#FFD43B", // Python
-        "#FFCA28", // Firebase
-        "#FF9900", // AWS
-        "#0db7ed", // Docker
+        "#61DBFB",
+        "#68A063",
+        "#FFD43B",
+        "#FFCA28",
+        "#FF9900",
+        "#0db7ed",
       ],
     },
   ],
@@ -71,9 +67,7 @@ const pieChartOptions = {
 function PortfolioPage() {
   return (
     <div className="min-h-screen flex bg-[#212428] text-gray-100">
-      {/* LEFT SIDEBAR */}
       <aside className="w-72 bg-[#1E1F23] flex flex-col p-6">
-        {/* Profile Section */}
         <div className="flex flex-col items-center text-center mb-8">
           <div className="w-24 h-24 rounded-full overflow-hidden mb-4">
             <img
@@ -87,8 +81,6 @@ function PortfolioPage() {
             Front End Developer / UI/UX Engineer
           </p>
         </div>
-
-        {/* Additional Info */}
         <div className="text-sm space-y-2 mb-8">
           <div className="flex items-center gap-2">
             <FaMapMarkerAlt className="text-[#FFD15C]" />
@@ -107,8 +99,6 @@ function PortfolioPage() {
             <span>English, French, Spanish</span>
           </div>
         </div>
-
-        {/* Skill Bars */}
         <div className="space-y-4">
           <SkillBar skill="HTML" icon={<FaHtml5 />} percentage="90" />
           <SkillBar skill="CSS" icon={<FaCss3Alt />} percentage="85" />
@@ -120,10 +110,7 @@ function PortfolioPage() {
           />
         </div>
       </aside>
-
-      {/* MAIN CONTENT */}
       <main className="flex-1 p-8">
-        {/* HERO / INTRO SECTION */}
         <section className="bg-[#1E1F23] rounded-lg p-8 mb-8 flex flex-col md:flex-row items-center">
           <div className="flex-1">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -143,7 +130,6 @@ function PortfolioPage() {
           <div className="mt-8 md:mt-0 md:ml-8 w-48 h-48 rounded-full bg-gray-500 flex-shrink-0"></div>
         </section>
 
-        {/* STATS ROW */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <StatCard value="10+" label="Years Experience" />
           <StatCard value="143" label="Completed Projects" />
@@ -151,7 +137,6 @@ function PortfolioPage() {
           <StatCard value="20+" label="Honors & Awards" />
         </section>
 
-        {/* MY SERVICES SECTION */}
         <section className="mb-8">
           <h2 className="text-3xl font-bold mb-4">My Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -170,11 +155,9 @@ function PortfolioPage() {
           </div>
         </section>
 
-        {/* DASHBOARD INFO BELOW "MY SERVICES" */}
         <section className="mb-8">
           <h2 className="text-3xl font-bold mb-6">More Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* About Me Card */}
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
               <h3 className="text-xl font-bold mb-2">About Me</h3>
               <div className="w-32 h-32 rounded-full overflow-hidden mb-4 mx-auto">
@@ -191,7 +174,6 @@ function PortfolioPage() {
               </p>
             </div>
 
-            {/* Certifications Card */}
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
               <h3 className="text-xl font-bold mb-2">Certifications</h3>
               <div className="relative w-full" style={{ height: "300px" }}>
@@ -199,7 +181,6 @@ function PortfolioPage() {
               </div>
             </div>
 
-            {/* Projects Card */}
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
               <h3 className="text-xl font-bold mb-2">My Projects</h3>
               <div className="flex gap-2 mb-4">
@@ -225,7 +206,6 @@ function PortfolioPage() {
               </p>
             </div>
 
-            {/* Thoughts Card */}
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
               <h3 className="text-xl font-bold mb-2">
                 My Technological Thoughts
@@ -236,7 +216,6 @@ function PortfolioPage() {
               </p>
             </div>
 
-            {/* Experience Card */}
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
               <h3 className="text-xl font-bold mb-2">Experience</h3>
               <p className="text-gray-300 mb-4">
@@ -245,7 +224,6 @@ function PortfolioPage() {
               </p>
             </div>
 
-            {/* Technologies Card */}
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col md:col-span-2">
               <h3 className="text-xl font-bold mb-2">Technologies</h3>
               <p className="text-gray-300 mb-4">
@@ -261,7 +239,6 @@ function PortfolioPage() {
               </p>
             </div>
 
-            {/* Download Resume Card */}
             <a
               href={resumePDF}
               target="_blank"
@@ -283,7 +260,6 @@ function PortfolioPage() {
   );
 }
 
-/* Skill Bar Component */
 function SkillBar({ skill, icon, percentage }) {
   return (
     <div>
@@ -304,7 +280,6 @@ function SkillBar({ skill, icon, percentage }) {
   );
 }
 
-/* Stats Card Component */
 function StatCard({ value, label }) {
   return (
     <div className="bg-[#1E1F23] p-6 text-center rounded-lg">
@@ -314,7 +289,6 @@ function StatCard({ value, label }) {
   );
 }
 
-/* Service Card Component */
 function ServiceCard({ title, description }) {
   return (
     <div className="bg-[#1E1F23] p-6 rounded-lg text-center flex flex-col">
