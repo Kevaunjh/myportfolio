@@ -13,12 +13,10 @@ import {
 import { IoIosArrowForward } from "react-icons/io";
 import { Bar, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, registerables, CategoryScale } from "chart.js";
-
 import PersonalImage from "./../Images/PersonalImage.png";
 import OuterBanx from "./../Images/OuterBanx.png";
 import TrainWeb from "./../Images/TrainWeb.png";
 import resumePDF from "./../Images/Kevaun Harris Resume.pdf";
-
 ChartJS.register(...registerables, CategoryScale);
 
 const barChartData = {
@@ -67,7 +65,7 @@ const pieChartOptions = {
 function PortfolioPage() {
   return (
     <div className="min-h-screen flex bg-[#212428] text-gray-100">
-      <aside className="w-72 bg-[#1E1F23] flex flex-col p-6">
+      <aside className="w-72 bg-[#1E1F23] p-6 h-screen sticky top-0 flex flex-col">
         <div className="flex flex-col items-center text-center mb-8">
           <div className="w-24 h-24 rounded-full overflow-hidden mb-4">
             <img
@@ -110,7 +108,7 @@ function PortfolioPage() {
           />
         </div>
       </aside>
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-8 overflow-y-auto">
         <section className="bg-[#1E1F23] rounded-lg p-8 mb-8 flex flex-col md:flex-row items-center">
           <div className="flex-1">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -129,14 +127,12 @@ function PortfolioPage() {
           </div>
           <div className="mt-8 md:mt-0 md:ml-8 w-48 h-48 rounded-full bg-gray-500 flex-shrink-0"></div>
         </section>
-
         <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <StatCard value="10+" label="Years Experience" />
           <StatCard value="143" label="Completed Projects" />
           <StatCard value="114" label="Happy Customers" />
           <StatCard value="20+" label="Honors & Awards" />
         </section>
-
         <section className="mb-8">
           <h2 className="text-3xl font-bold mb-4">My Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -154,7 +150,6 @@ function PortfolioPage() {
             />
           </div>
         </section>
-
         <section className="mb-8">
           <h2 className="text-3xl font-bold mb-6">More Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -173,14 +168,12 @@ function PortfolioPage() {
                 backend solutions.
               </p>
             </div>
-
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
               <h3 className="text-xl font-bold mb-2">Certifications</h3>
               <div className="relative w-full" style={{ height: "300px" }}>
                 <Bar data={barChartData} options={barChartOptions} />
               </div>
             </div>
-
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
               <h3 className="text-xl font-bold mb-2">My Projects</h3>
               <div className="flex gap-2 mb-4">
@@ -205,7 +198,6 @@ function PortfolioPage() {
                 scalability.
               </p>
             </div>
-
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
               <h3 className="text-xl font-bold mb-2">
                 My Technological Thoughts
@@ -215,7 +207,6 @@ function PortfolioPage() {
                 coding practices.
               </p>
             </div>
-
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
               <h3 className="text-xl font-bold mb-2">Experience</h3>
               <p className="text-gray-300 mb-4">
@@ -223,7 +214,6 @@ function PortfolioPage() {
                 and managing projects.
               </p>
             </div>
-
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col md:col-span-2">
               <h3 className="text-xl font-bold mb-2">Technologies</h3>
               <p className="text-gray-300 mb-4">
@@ -238,7 +228,6 @@ function PortfolioPage() {
                 with, spanning frontend, backend, and cloud-based solutions.
               </p>
             </div>
-
             <a
               href={resumePDF}
               target="_blank"
