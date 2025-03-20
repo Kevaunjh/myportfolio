@@ -16,6 +16,8 @@ import {
   FaBug,
   FaGraduationCap,
   FaAward,
+  FaReact,
+  FaJava,
 } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { Bar, Pie } from "react-chartjs-2";
@@ -121,18 +123,20 @@ function PortfolioPage() {
           <div className="flex items-center gap-2">
             <FaUserAlt className="text-[#FFD15C]" />
             <span>Age: 22</span>
+            <span>Age: 22</span>
           </div>
           <div className="flex items-center gap-2">
             <FaCalendarAlt className="text-[#FFD15C]" />
-            <span>Residence: Canada</span>
+            <span>Residence: Ontario, Whitby</span>
           </div>
           <div className="flex items-center gap-2">
             <FaLanguage className="text-[#FFD15C]" />
             <span>English</span>
+            <span>English</span>
           </div>
         </div>
+        <h3 className="text-lg mb-4">Proficiency</h3>
         <div className="space-y-4">
-          {/* Updated skills in sidebar with React and Python instead of WordPress and PHP */}
           <SkillBar skill="React" icon={<FaReact />} percentage="95" />
           <SkillBar skill="Python" icon={<FaPython />} percentage="92" />
           <SkillBar skill="HTML" icon={<FaHtml5 />} percentage="90" />
@@ -192,7 +196,6 @@ function PortfolioPage() {
         <section className="mb-8">
           <h2 className="text-3xl font-bold mb-6">My Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Enhanced About Me Box with more detailed information */}
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col min-h-[420px]">
               <h3 className="text-xl font-bold mb-4">About Me</h3>
               <div className="w-32 h-32 rounded-full overflow-hidden mb-4 mx-auto">
@@ -231,7 +234,6 @@ function PortfolioPage() {
               </div>
             </div>
 
-            {/* Skills Highlight */}
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col min-h-[420px]">
               <h3 className="text-xl font-bold mb-4">Skills Highlight</h3>
               <div className="space-y-3 mb-4">
@@ -267,8 +269,6 @@ function PortfolioPage() {
                 with, spanning frontend, backend, and cloud-based solutions.
               </p>
             </div>
-
-            {/* Download Resume Box */}
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col items-center justify-center hover:bg-[#27282C] transition min-h-[420px]">
               <a
                 href={resumePDF}
@@ -368,7 +368,6 @@ function PortfolioPage() {
               </div>
             </div>
 
-            {/* Projects Section */}
             <h3 className="text-3xl font-bold mb-2 col-span-3">My Projects</h3>
             <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col md:col-span-3">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
