@@ -16,7 +16,6 @@ import {
   FaBug,
   FaGraduationCap,
   FaAward,
-  FaReact,
   FaJava,
 } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
