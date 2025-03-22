@@ -1,4 +1,4 @@
-# Portfolio Website  
+# My Showcase
 
 This is my personal portfolio website, showcasing my projects, skills, and experience in AI and development. It serves as a central hub for my work and professional background.  
 
