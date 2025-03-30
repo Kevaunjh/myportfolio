@@ -285,7 +285,7 @@ function PortfolioPage() {
                 </p>
                 <p>
                   As a graduate from Ontario Tech University with a degree in
-                  Computer Science, I've cultivated expertise in building
+                  Software Engineering, I've cultivated expertise in building
                   responsive web applications and implementing AI solutions.
                 </p>
                 <p>
