@@ -94,7 +94,7 @@ const projectsData = [
     icon: <FaChartLine className="text-[#FFD15C] text-2xl" />,
     githubLink: "#",
     description:
-      "A machine learning model that predicts Tesla stock price movements using historical data and sentiment analysis. Implements various ML algorithms including LSTM networks and random forests to compare prediction accuracy.",
+      "IN PROGRESS : A machine learning model that predicts Tesla stock price movements using historical data and sentiment analysis. Implements various ML algorithms including LSTM networks and random forests to compare prediction accuracy.",
   },
   {
     title: "Overwatch Wordle",
@@ -155,8 +155,7 @@ function PortfolioPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // In a real implementation, you would handle the email sending logic here
-    // For now, we'll just show an alert
+
     alert(
       `Form submitted! An email would be sent to Kevaunjh@gmail.com with the subject "Application Offer From ${formData.company}"`
     );
@@ -285,7 +284,7 @@ function PortfolioPage() {
                   and algorithms.
                 </p>
                 <p>
-                  As a graduate from the University of Toronto with a degree in
+                  As a graduate from Ontario Tech University with a degree in
                   Computer Science, I've cultivated expertise in building
                   responsive web applications and implementing AI solutions.
                 </p>
