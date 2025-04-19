@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   FaMapMarkerAlt,
   FaUserAlt,
@@ -131,6 +131,7 @@ function PortfolioPage() {
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
   const [selectedService, setSelectedService] = useState("");
+  const modalRef = React.createRef();
   const [formData, setFormData] = useState({
     company: "",
     position: "",
@@ -184,6 +185,26 @@ function PortfolioPage() {
       email: "",
     });
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      const clickedOutside = event.target.closest(".modal-content") === null;
+
+      if (clickedOutside) {
+        if (showProjectModal) {
+          closeProjectModal();
+        }
+        if (showContactModal) {
+          closeContactModal();
+        }
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick); // use mousedown for better UX
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [showProjectModal, showContactModal]);
 
   return (
     <>
