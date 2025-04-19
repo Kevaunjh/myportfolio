@@ -20,6 +20,7 @@ import {
   FaTimes,
   FaPaperPlane,
   FaBars,
+  FaBookOpen,
 } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { Bar, Pie } from "react-chartjs-2";
@@ -93,9 +94,9 @@ const projectsData = [
     title: "Tesla Stock Prediction",
     technologies: "Python",
     icon: <FaChartLine className="text-[#FFD15C] text-2xl" />,
-    githubLink: "#",
+    githubLink: "https://github.com/Kevaunjh/Stock-Prediction",
     description:
-      "IN PROGRESS : A machine learning model that predicts Tesla stock price movements using historical data and sentiment analysis. Implements various ML algorithms including LSTM networks and random forests to compare prediction accuracy.",
+      "A machine learning model that predicts Tesla stock price movements using historical data and sentiment analysis. Implements various ML algorithms including LSTM networks and random forests to compare prediction accuracy.",
   },
   {
     title: "Overwatch Wordle",
@@ -112,6 +113,14 @@ const projectsData = [
     githubLink: "https://github.com/Kevaunjh/insect-identification",
     description:
       "A computer vision application that identifies insect species from images. Uses convolutional neural networks for classification and features a React frontend for user interaction. The system maintains a MongoDB database of identified species and their characteristics.",
+  },
+  {
+    title: "MangaDIO",
+    technologies: "React, Node.js, Express",
+    icon: <FaBookOpen className="text-[#FFD15C] text-2xl" />,
+    githubLink: "https://github.com/Kevaunjh/Overwatch_Wordle",
+    description:
+      "IN PROGRESS: A manga site focused around built in text-to-speech that works with manga, comics and many more. The site has responsive screen scaling, uses open router API's to utilize AI for OCR capabilities, and uses RESTful API calls to ensure consistently updated mangas.",
   },
 ];
 
