@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Mainpage from "./Pages/Mainpage";
-import Experience from "./Pages/Experience";
-import Projects from "./Pages/Projects";
-import Contact from "./Pages/Contact";
+import { Analytics } from "@vercel/analytics";
 
 function App() {
   const [currentComponent, setCurrentComponent] = useState("/");
@@ -20,24 +18,9 @@ function App() {
             path="/"
             element={<Mainpage toggleComponent={toggleComponent} />}
           />
-          <Route
-            path="/main"
-            element={<Mainpage toggleComponent={toggleComponent} />}
-          />
-          <Route
-            path="/whativedone"
-            element={<Projects toggleComponent={toggleComponent} />}
-          />
-          <Route
-            path="/whatido"
-            element={<Experience toggleComponent={toggleComponent} />}
-          />
-          <Route
-            path="/howtofindme"
-            element={<Contact toggleComponent={toggleComponent} />}
-          />
         </Routes>
       </div>
+      <Analytics />
     </Router>
   );
 }

@@ -200,7 +200,7 @@ function PortfolioPage() {
       }
     };
 
-    document.addEventListener("mousedown", handleOutsideClick); // use mousedown for better UX
+    document.addEventListener("mousedown", handleOutsideClick);
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
