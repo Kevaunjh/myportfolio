@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { TypeAnimation } from "react-type-animation";
 import {
   FaMapMarkerAlt,
   FaUserAlt,
@@ -36,12 +39,12 @@ const barChartData = {
     {
       label: "Proficiency Level",
       data: [90, 85, 80, 70, 75],
-      backgroundColor: ["#4A90E2", "#50E3C2", "#F5A623", "#D0021B", "#9013FE"],
+      backgroundColor: ["#7C3AED", "#2DD4BF", "#F59E0B", "#EC4899", "#3B82F6"],
     },
     {
       label: "Interest Level",
       data: [95, 80, 85, 90, 70],
-      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#8E44AD", "#2ECC71"],
+      backgroundColor: ["#8B5CF6", "#14B8A6", "#D97706", "#DB2777", "#2563EB"],
     },
   ],
 };
@@ -57,12 +60,12 @@ const pieChartData = {
     {
       data: [30, 20, 15, 15, 10, 10],
       backgroundColor: [
-        "#61DBFB",
-        "#68A063",
-        "#FFD43B",
-        "#FFCA28",
-        "#FF9900",
-        "#0db7ed",
+        "#7C3AED",
+        "#2DD4BF",
+        "#F59E0B",
+        "#EC4899",
+        "#3B82F6",
+        "#8B5CF6",
       ],
     },
   ],
@@ -77,7 +80,7 @@ const projectsData = [
   {
     title: "Musical Teaching",
     technologies: "HTML, CSS",
-    icon: <FaMusic className="text-[#FFD15C] text-2xl" />,
+    icon: <FaMusic className="text-[#7C3AED] text-2xl" />,
     githubLink: "https://github.com/Kevaunjh/MusicalTeach",
     description:
       "An interactive web application designed to teach musical concepts to beginners. Features include interactive music notation, chord visualization, and real-time audio feedback to help users understand music theory fundamentals.",
@@ -85,7 +88,7 @@ const projectsData = [
   {
     title: "Railway System Management",
     technologies: "PHP, HTML, CSS",
-    icon: <FaTrain className="text-[#FFD15C] text-2xl" />,
+    icon: <FaTrain className="text-[#7C3AED] text-2xl" />,
     githubLink: "https://github.com/Kevaunjh/railway-system-website",
     description:
       "A comprehensive railway management system that handles ticket bookings, train schedules, and passenger information. Built with PHP backend and responsive frontend design to ensure accessibility across devices.",
@@ -93,7 +96,7 @@ const projectsData = [
   {
     title: "Tesla Stock Prediction",
     technologies: "Python",
-    icon: <FaChartLine className="text-[#FFD15C] text-2xl" />,
+    icon: <FaChartLine className="text-[#7C3AED] text-2xl" />,
     githubLink: "https://github.com/Kevaunjh/Stock-Prediction",
     description:
       "A machine learning model that predicts Tesla stock price movements using historical data and sentiment analysis. Implements various ML algorithms including LSTM networks and random forests to compare prediction accuracy.",
@@ -101,7 +104,7 @@ const projectsData = [
   {
     title: "Overwatch Wordle",
     technologies: "React, Node.js",
-    icon: <FaGamepad className="text-[#FFD15C] text-2xl" />,
+    icon: <FaGamepad className="text-[#7C3AED] text-2xl" />,
     githubLink: "https://github.com/Kevaunjh/Overwatch_Wordle",
     description:
       "A Wordle-style game themed around Overwatch characters. Players must guess a daily Overwatch hero based on various attributes and characteristics. Features custom animations and game mechanics.",
@@ -109,7 +112,7 @@ const projectsData = [
   {
     title: "Autonomous Insect Identification",
     technologies: "Python, React, MongoDB",
-    icon: <FaBug className="text-[#FFD15C] text-2xl" />,
+    icon: <FaBug className="text-[#7C3AED] text-2xl" />,
     githubLink: "https://github.com/Kevaunjh/insect-identification",
     description:
       "A computer vision application that identifies insect species from images. Uses convolutional neural networks for classification and features a React frontend for user interaction. The system maintains a MongoDB database of identified species and their characteristics.",
@@ -117,7 +120,7 @@ const projectsData = [
   {
     title: "MangaDIO",
     technologies: "React, Node.js, Express",
-    icon: <FaBookOpen className="text-[#FFD15C] text-2xl" />,
+    icon: <FaBookOpen className="text-[#7C3AED] text-2xl" />,
     githubLink: "https://github.com/Kevaunjh/Overwatch_Wordle",
     description:
       "IN PROGRESS: A manga site focused around built in text-to-speech that works with manga, comics and many more. The site has responsive screen scaling, uses open router API's to utilize AI for OCR capabilities, and uses RESTful API calls to ensure consistently updated mangas.",
@@ -125,6 +128,58 @@ const projectsData = [
 ];
 
 const serviceTypes = ["Web Development", "UI/UX Design", "AI Training"];
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 60 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 },
+};
+
+const hoverScale = {
+  scale: 1.05,
+  transition: { duration: 0.2 },
+};
+
+const containerAnimation = {
+  initial: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.02,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
+const lineAnimation = {
+  initial: {
+    width: 0,
+  },
+  hover: {
+    width: "100%",
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
+function AnimatedContainer({ children, className }) {
+  return (
+    <motion.div
+      className={`relative ${className}`}
+      variants={containerAnimation}
+      initial="initial"
+      whileHover="hover"
+    >
+      {children}
+      <motion.div
+        className="absolute bottom-0 left-0 h-[2px] bg-[#7C3AED]"
+        variants={lineAnimation}
+      />
+    </motion.div>
+  );
+}
 
 function PortfolioPage() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -141,6 +196,11 @@ function PortfolioPage() {
     email: "",
   });
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -208,7 +268,7 @@ function PortfolioPage() {
 
   return (
     <>
-      <div className="lg:hidden flex items-center justify-between p-4 bg-[#1E1F23] fixed top-0 left-0 right-0 z-40">
+      <div className="lg:hidden flex items-center justify-between p-4 bg-[#0F172A] fixed top-0 left-0 right-0 z-40">
         <button
           onClick={toggleSidebar}
           className="text-gray-100 flex items-center justify-center"
@@ -221,9 +281,9 @@ function PortfolioPage() {
         <div className="w-6"></div>
       </div>
 
-      <div className="min-h-screen flex bg-[#212428] text-gray-100">
+      <div className="min-h-screen flex bg-[#1E293B] text-gray-100">
         <aside
-          className={`w-72 bg-[#1E1F23] p-6 h-screen fixed inset-y-0 left-0 transform transition-transform duration-300 ease-in-out z-50 overflow-y-auto ${
+          className={`w-72 bg-[#0F172A] p-6 h-screen fixed inset-y-0 left-0 transform transition-transform duration-300 ease-in-out z-50 overflow-y-auto ${
             isSidebarOpen
               ? "translate-x-0"
               : "-translate-x-full lg:translate-x-0"
@@ -253,19 +313,19 @@ function PortfolioPage() {
           </div>
           <div className="text-sm space-y-2 mb-8">
             <div className="flex items-center gap-2">
-              <FaMapMarkerAlt className="text-[#FFD15C]" />
+              <FaMapMarkerAlt className="text-[#7C3AED]" />
               <span>Toronto, Canada</span>
             </div>
             <div className="flex items-center gap-2">
-              <FaUserAlt className="text-[#FFD15C]" />
+              <FaUserAlt className="text-[#7C3AED]" />
               <span>Age: 22</span>
             </div>
             <div className="flex items-center gap-2">
-              <FaCalendarAlt className="text-[#FFD15C]" />
+              <FaCalendarAlt className="text-[#7C3AED]" />
               <span>Residence: Ontario, Whitby</span>
             </div>
             <div className="flex items-center gap-2">
-              <FaLanguage className="text-[#FFD15C]" />
+              <FaLanguage className="text-[#7C3AED]" />
               <span>English</span>
             </div>
           </div>
@@ -286,19 +346,23 @@ function PortfolioPage() {
         )}
 
         <main className="flex-1 p-8 lg:ml-72 w-full overflow-y-auto pt-20 md:pt-8">
-          <section className="bg-[#1E1F23] rounded-lg p-8 mb-8 flex flex-col md:flex-row items-center">
+          <AnimatedContainer className="bg-[#0F172A] rounded-lg p-8 mb-8 flex flex-col md:flex-row items-center">
             <div className="flex-1">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 Discover My Abilities!
               </h1>
-              <p className="text-lg text-gray-300 mb-6">
-                I work with{" "}
-                <code className="bg-[#212428] px-1 py-0.5 rounded">
-                  {"Websites, UI/UX Designs, and AI Solutions."}
-                </code>
-              </p>
+              <TypeAnimation
+                sequence={[
+                  "I work with Websites, UI/UX Designs, and AI Solutions.",
+                  1000,
+                ]}
+                wrapper="p"
+                cursor={true}
+                repeat={false}
+                className="text-lg text-gray-300 mb-6"
+              />
               <a href="https://github.com/Kevaunjh" className="hover:underline">
-                <button className="bg-[#FFD15C] text-gray-900 px-6 py-3 font-semibold rounded-full inline-flex items-center hover:bg-yellow-400 transition">
+                <button className="bg-[#7C3AED] text-gray-900 px-6 py-3 font-semibold rounded-full inline-flex items-center hover:bg-purple-400 transition">
                   Check Me Out!
                   <IoIosArrowForward className="ml-2" />
                 </button>
@@ -311,7 +375,7 @@ function PortfolioPage() {
                 className="w-full h-full object-cover rounded-full"
               />
             </div>
-          </section>
+          </AnimatedContainer>
           <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             <StatCard value="6+" label="Years Web Experience" />
             <StatCard value="5+" label="Completed AI Projects" />
@@ -345,7 +409,7 @@ function PortfolioPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {" "}
-              <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
+              <AnimatedContainer className="bg-[#0F172A] rounded-lg p-6 flex flex-col">
                 <h3 className="text-xl font-bold mb-4">About Me</h3>
                 <div className="w-32 h-32 rounded-full overflow-hidden mb-4 mx-auto">
                   <img
@@ -372,14 +436,14 @@ function PortfolioPage() {
                     learning.
                   </p>
                 </div>
-              </div>
-              <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
+              </AnimatedContainer>
+              <AnimatedContainer className="bg-[#0F172A] rounded-lg p-6 flex flex-col">
                 <h3 className="text-xl font-bold mb-2">Certifications</h3>
                 <div className="relative w-full aspect-[4/3] max-h-[300px]">
                   <Bar data={barChartData} options={barChartOptions} />
                 </div>
-              </div>
-              <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col">
+              </AnimatedContainer>
+              <AnimatedContainer className="bg-[#0F172A] rounded-lg p-6 flex flex-col">
                 <h3 className="text-xl font-bold mb-4">Skills Highlight</h3>
                 <div className="space-y-3 mb-4 text-sm sm:text-base">
                   <SkillItem skill="Front-End Development" level="Advanced" />
@@ -398,22 +462,22 @@ function PortfolioPage() {
                   Continuously expanding my technical expertise through
                   projects, courses, and hands-on experience.
                 </p>
-              </div>
-              <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col items-center justify-center hover:bg-[#27282C] transition ">
+              </AnimatedContainer>
+              <AnimatedContainer className="bg-[#0F172A] rounded-lg p-6 flex flex-col items-center justify-center hover:bg-[#334155] transition ">
                 <a
                   href={resumePDF}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex flex-col items-center w-full justify-center text-center"
                 >
-                  <FaDownload size={48} className="mb-4 text-[#FFD15C]" />
+                  <FaDownload size={48} className="mb-4 text-[#7C3AED]" />
                   <h3 className="text-xl font-bold mb-2">Download Resume</h3>
                   <p className="text-gray-300 text-sm sm:text-base">
                     Click here to view or download my latest resume.
                   </p>
                 </a>
-              </div>
-              <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col sm:col-span-2">
+              </AnimatedContainer>
+              <AnimatedContainer className="bg-[#0F172A] rounded-lg p-6 flex flex-col sm:col-span-2">
                 <h3 className="text-xl font-bold mb-2">Technologies</h3>
                 <p className="text-gray-300 mb-4 text-sm sm:text-base">
                   Expertise in various technologies including React, Node.js,
@@ -426,11 +490,11 @@ function PortfolioPage() {
                   This chart represents the distribution of technologies I work
                   with, spanning frontend, backend, and cloud-based solutions.
                 </p>
-              </div>
+              </AnimatedContainer>
               <h3 className="text-3xl font-bold mb-2 col-span-1 sm:col-span-2">
                 Professional Experience
               </h3>
-              <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col col-span-1 sm:col-span-2 text-sm sm:text-base">
+              <AnimatedContainer className="bg-[#0F172A] rounded-lg p-6 flex flex-col col-span-1 sm:col-span-2 text-sm sm:text-base">
                 <div className="mb-8">
                   <h2 className="text-2xl font-bold">
                     Front-End Engineer at SeeTek
@@ -513,20 +577,30 @@ function PortfolioPage() {
                     for user-centered design and continuous learning.
                   </p>
                 </div>
-              </div>
+              </AnimatedContainer>
               <h3 className="text-3xl font-bold mb-2 col-span-1 sm:col-span-2">
                 My Projects
               </h3>
-              <div className="bg-[#1E1F23] rounded-lg p-6 flex flex-col col-span-1 sm:col-span-2">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-[#0F172A] rounded-lg p-6 flex flex-col col-span-1 sm:col-span-2">
+                <motion.div
+                  ref={ref}
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
                   {projectsData.map((project, index) => (
-                    <ProjectCard
+                    <motion.div
                       key={index}
-                      project={project}
-                      openProjectModal={openProjectModal}
-                    />
+                      variants={fadeInUp}
+                      initial="initial"
+                      animate={inView ? "animate" : "initial"}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                    >
+                      <ProjectCard
+                        project={project}
+                        openProjectModal={openProjectModal}
+                      />
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
               </div>
             </div>
           </section>
@@ -534,7 +608,7 @@ function PortfolioPage() {
 
         {showProjectModal && selectedProject && (
           <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-75">
-            <div className="bg-[#1E1F23] p-6 rounded-lg w-full max-w-2xl mx-4">
+            <div className="bg-[#0F172A] p-6 rounded-lg w-full max-w-2xl mx-4">
               <div className="flex justify-between items-center mb-4">
                 <div className="flex items-center">
                   {selectedProject.icon}
@@ -565,7 +639,7 @@ function PortfolioPage() {
                   href={selectedProject.githubLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#FFD15C] text-gray-900 px-4 py-2 font-semibold rounded-full inline-flex items-center hover:bg-yellow-400 transition"
+                  className="bg-[#7C3AED] text-gray-900 px-4 py-2 font-semibold rounded-full inline-flex items-center hover:bg-purple-400 transition"
                 >
                   View on GitHub
                   <IoIosArrowForward className="ml-2" />
@@ -583,7 +657,7 @@ function PortfolioPage() {
 
         {showContactModal && (
           <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-75">
-            <div className="bg-[#1E1F23] p-6 rounded-lg w-full max-w-2xl mx-4">
+            <div className="bg-[#0F172A] p-6 rounded-lg w-full max-w-2xl mx-4">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold">
                   Request {selectedService} Service
@@ -607,7 +681,7 @@ function PortfolioPage() {
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full bg-[#27282C] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFD15C]"
+                    className="w-full bg-[#334155] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED]"
                     required
                   />
                 </div>
@@ -625,7 +699,7 @@ function PortfolioPage() {
                     name="position"
                     value={formData.position}
                     onChange={handleInputChange}
-                    className="w-full bg-[#27282C] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFD15C]"
+                    className="w-full bg-[#334155] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED]"
                     required
                   />
                 </div>
@@ -643,7 +717,7 @@ function PortfolioPage() {
                     name="location"
                     value={formData.location}
                     onChange={handleInputChange}
-                    className="w-full bg-[#27282C] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFD15C]"
+                    className="w-full bg-[#334155] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED]"
                     required
                   />
                 </div>
@@ -660,7 +734,7 @@ function PortfolioPage() {
                     name="workType"
                     value={formData.workType}
                     onChange={handleInputChange}
-                    className="w-full bg-[#27282C] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFD15C]"
+                    className="w-full bg-[#334155] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED]"
                   >
                     <option value="Remote">Remote</option>
                     <option value="Hybrid">Hybrid</option>
@@ -678,7 +752,7 @@ function PortfolioPage() {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full bg-[#27282C] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFD15C]"
+                    className="w-full bg-[#334155] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED]"
                     required
                   />
                 </div>
@@ -693,14 +767,14 @@ function PortfolioPage() {
                     value={formData.message}
                     onChange={handleInputChange}
                     rows={4}
-                    className="w-full bg-[#27282C] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFD15C]"
+                    className="w-full bg-[#334155] text-white p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7C3AED]"
                   ></textarea>
                 </div>
 
                 <div className="flex justify-between mt-6">
                   <button
                     type="submit"
-                    className="bg-[#FFD15C] text-gray-900 px-6 py-3 font-semibold rounded-full inline-flex items-center hover:bg-yellow-400 transition"
+                    className="bg-[#7C3AED] text-gray-900 px-6 py-3 font-semibold rounded-full inline-flex items-center hover:bg-purple-400 transition"
                   >
                     Submit Application
                     <FaPaperPlane className="ml-2" />
@@ -727,14 +801,14 @@ function SkillBar({ skill, icon, percentage }) {
     <div>
       <div className="flex justify-between mb-1 text-sm">
         <span className="flex items-center gap-2">
-          <span className="text-[#FFD15C]">{icon}</span>
+          <span className="text-[#7C3AED]">{icon}</span>
           {skill}
         </span>
         <span>{percentage}%</span>
       </div>
-      <div className="w-full bg-[#2A2B2F] h-2 rounded">
+      <div className="w-full bg-[#475569] h-2 rounded">
         <div
-          className="bg-[#FFD15C] h-2 rounded"
+          className="bg-[#7C3AED] h-2 rounded"
           style={{ width: `${percentage}%` }}
         ></div>
       </div>
@@ -766,31 +840,31 @@ function SkillItem({ skill, level }) {
 
 function StatCard({ value, label }) {
   return (
-    <div className="bg-[#1E1F23] p-6 text-center rounded-lg">
-      <h3 className="text-3xl font-bold text-[#FFD15C] mb-2">{value}</h3>
+    <AnimatedContainer className="bg-[#0F172A] p-6 text-center rounded-lg">
+      <h3 className="text-3xl font-bold text-[#7C3AED] mb-2">{value}</h3>
       <p className="text-sm text-gray-300">{label}</p>
-    </div>
+    </AnimatedContainer>
   );
 }
 
 function ServiceCard({ title, description, openContactModal }) {
   return (
-    <div className="bg-[#1E1F23] p-6 rounded-lg text-center flex flex-col">
+    <AnimatedContainer className="bg-[#0F172A] p-6 rounded-lg text-center flex flex-col">
       <h3 className="text-xl font-bold mb-2">{title}</h3>
       <p className="text-gray-300 mb-4">{description}</p>
       <button
         onClick={() => openContactModal(title)}
-        className="bg-[#FFD15C] text-gray-900 px-4 py-2 font-semibold rounded-full hover:bg-yellow-400 transition mt-auto"
+        className="bg-[#7C3AED] text-gray-900 px-4 py-2 font-semibold rounded-full hover:bg-purple-400 transition mt-auto"
       >
         Order Now
       </button>
-    </div>
+    </AnimatedContainer>
   );
 }
 
 function ProjectCard({ project, openProjectModal }) {
   return (
-    <div className="bg-[#27282C] p-6 rounded-lg hover:transform hover:scale-105 transition duration-300">
+    <AnimatedContainer className="bg-[#334155] p-6 rounded-lg">
       <div className="flex items-center mb-4">
         {project.icon}
         <h3 className="text-xl font-bold ml-3">{project.title}</h3>
@@ -799,7 +873,7 @@ function ProjectCard({ project, openProjectModal }) {
       <div className="flex justify-between items-center mt-4">
         <button
           onClick={() => openProjectModal(project)}
-          className="bg-transparent border border-[#FFD15C] text-[#FFD15C] px-3 py-1 rounded text-sm hover:bg-[#FFD15C] hover:text-gray-900 transition"
+          className="bg-transparent border border-[#7C3AED] text-[#7C3AED] px-3 py-1 rounded text-sm hover:bg-[#7C3AED] hover:text-gray-900 transition"
         >
           View Details
         </button>
@@ -812,7 +886,7 @@ function ProjectCard({ project, openProjectModal }) {
           GitHub <IoIosArrowForward className="inline ml-1" />
         </a>
       </div>
-    </div>
+    </AnimatedContainer>
   );
 }
 
