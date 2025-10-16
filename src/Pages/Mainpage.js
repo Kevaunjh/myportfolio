@@ -353,7 +353,7 @@ function PortfolioPage() {
               </h1>
               <TypeAnimation
                 sequence={[
-                  "I work with Websites, UI/UX Designs, and AI Solutions.",
+                  "I work with Websites, UI/UX Designs, Data Management and AI Solutions.",
                   1000,
                 ]}
                 wrapper="p"
@@ -388,17 +388,26 @@ function PortfolioPage() {
               <ServiceCard
                 title="Web Development"
                 description="I create responsive, dynamic websites using modern frameworks and best practices."
-                openContactModal={openContactModal}
               />
               <ServiceCard
                 title="UI/UX Design"
                 description="I design user-centric interfaces that balance aesthetics and usability."
-                openContactModal={openContactModal}
               />
               <ServiceCard
                 title="AI Training"
                 description="I provide AI solutions for data analysis, image recognition, and natural language processing."
-                openContactModal={openContactModal}
+              />
+              <ServiceCard
+                title="Data Analyst"
+                description="I collect, process, and manage databases by identifying patterns and trends within data."
+              />
+              <ServiceCard
+                title="Mobile Development"
+                description="I engineer, develop and maintain mobile applications in Android Studio."
+              />
+              <ServiceCard
+                title="Full-Stack Development"
+                description="I simultaneously manage websites and databases for smooth integration and styling of realtime data."
               />
             </div>
           </section>
@@ -847,17 +856,11 @@ function StatCard({ value, label }) {
   );
 }
 
-function ServiceCard({ title, description, openContactModal }) {
+function ServiceCard({ title, description }) {
   return (
     <AnimatedContainer className="bg-[#0F172A] p-6 rounded-lg text-center flex flex-col">
-      <h3 className="text-xl font-bold mb-2">{title}</h3>
-      <p className="text-gray-300 mb-4">{description}</p>
-      <button
-        onClick={() => openContactModal(title)}
-        className="bg-[#7C3AED] text-gray-900 px-4 py-2 font-semibold rounded-full hover:bg-purple-400 transition mt-auto"
-      >
-        Order Now
-      </button>
+      <h3 className="text-2xl font-bold mb-2 text-[#7C3AED]">{title}</h3>
+      <p className="text-gray-300  text-md mb-4">{description}</p>
     </AnimatedContainer>
   );
 }
