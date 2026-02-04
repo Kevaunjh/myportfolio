@@ -78,14 +78,6 @@ const pieChartOptions = {
 
 const projectsData = [
   {
-    title: "Musical Teaching",
-    technologies: "HTML, CSS",
-    icon: <FaMusic className="text-[#7C3AED] text-2xl" />,
-    githubLink: "https://github.com/Kevaunjh/MusicalTeach",
-    description:
-      "An interactive web application designed to teach musical concepts to beginners. Features include interactive music notation, chord visualization, and real-time audio feedback to help users understand music theory fundamentals.",
-  },
-  {
     title: "Railway System Management",
     technologies: "PHP, HTML, CSS",
     icon: <FaTrain className="text-[#7C3AED] text-2xl" />,
@@ -121,7 +113,7 @@ const projectsData = [
     title: "MangaDIO",
     technologies: "React, Node.js, Express",
     icon: <FaBookOpen className="text-[#7C3AED] text-2xl" />,
-    githubLink: "https://github.com/Kevaunjh/Overwatch_Wordle",
+    githubLink: "https://github.com/Kevaunjh/mangadio",
     description:
       "IN PROGRESS: A manga site focused around built in text-to-speech that works with manga, comics and many more. The site has responsive screen scaling, uses open router API's to utilize AI for OCR capabilities, and uses RESTful API calls to ensure consistently updated mangas.",
   },
@@ -233,7 +225,7 @@ function PortfolioPage() {
     e.preventDefault();
 
     alert(
-      `Form submitted! An email would be sent to Kevaunjh@gmail.com with the subject "Application Offer From ${formData.company}"`
+      `Form submitted! An email would be sent to Kevaunjh@gmail.com with the subject "Application Offer From ${formData.company}"`,
     );
     closeContactModal();
     setFormData({
@@ -644,18 +636,9 @@ function PortfolioPage() {
               </div>
 
               <div className="flex justify-between">
-                <a
-                  href={selectedProject.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-[#7C3AED] text-gray-900 px-4 py-2 font-semibold rounded-full inline-flex items-center hover:bg-purple-400 transition"
-                >
-                  View on GitHub
-                  <IoIosArrowForward className="ml-2" />
-                </a>
                 <button
                   onClick={closeProjectModal}
-                  className="bg-gray-600 px-4 py-2 rounded-full hover:bg-gray-500 transition"
+                  className="bg-[#7C3AED] text-gray-900 px-4 py-2 font-semibold rounded-full inline-flex items-center hover:bg-purple-400 transition"
                 >
                   Close
                 </button>
